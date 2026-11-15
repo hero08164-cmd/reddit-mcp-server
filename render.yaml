@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: reddit-mcp-server
+    runtime: node
+    plan: free
+    buildCommand: npm ci --omit=dev
+    startCommand: node dist/index.js
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: TRANSPORT_TYPE
+        value: httpStream
+      - key: OAUTH_ENABLED
+        value: "true"
+      - key: OAUTH_TOKEN
+        generateValue: true
+      - key: REDDIT_SAFE_MODE
+        value: standard
+      - key: REDDIT_BOT_DISCLOSURE
+        value: auto
